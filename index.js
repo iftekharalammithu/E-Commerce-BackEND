@@ -3,6 +3,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { mongoDB_connection } = require("./Utils/MongoDB_Connect");
+const Auth_router = require("./Routes/Auth/Auth_Route");
 
 const app = express();
 
@@ -22,10 +23,11 @@ app.use(
       "Expires",
       "Pragma",
     ],
-    
   })
 );
 app.use(express.json());
+
+app.use("/api/auth", Auth_router);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
