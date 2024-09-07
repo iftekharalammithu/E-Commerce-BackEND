@@ -9,22 +9,30 @@ const app = express();
 
 const port = process.env.PORT || 4000;
 
-app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5000",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: [
       "Content-Type",
       "Authorization",
-      "Cahe-Control",
-      "X-Requested-With",
+      "Cache-Control",
       "Expires",
       "Pragma",
     ],
   })
 );
+// app.use(
+//   cors({
+//     origin: "http://localhost:5000", // Replace with your frontend origin
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization", "cache-control"],
+//     credentials: true, // Allow credentials
+//   })
+// );
+
+app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", Auth_router);

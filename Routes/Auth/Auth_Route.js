@@ -8,6 +8,8 @@ const {
 
 const Auth_router = express.Router();
 
+const che = () => console.log("working");
+
 Auth_router.post("/register", registerUser);
 Auth_router.post("/login", loginUser);
 Auth_router.post("/logout", logoutUser);

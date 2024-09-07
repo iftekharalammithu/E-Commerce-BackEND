@@ -1,13 +1,15 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Users = require("../../Models/Users");
-
+const dotenv = require("dotenv");
+dotenv.config();
 //register
 const registerUser = async (req, res) => {
   const { userName, email, password } = req.body;
 
   try {
     const checkUser = await Users.findOne({ email });
+
     if (checkUser)
       return res.json({
         success: false,
@@ -38,6 +40,7 @@ const registerUser = async (req, res) => {
 //login
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  // console.log(email, password);
 
   try {
     const checkUser = await Users.findOne({ email });
@@ -64,8 +67,8 @@ const loginUser = async (req, res) => {
         email: checkUser.email,
         userName: checkUser.userName,
       },
-      "CLIENT_SECRET_KEY",
-      { expiresIn: "60m" }
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
     );
 
     res.cookie("token", token, { httpOnly: true, secure: false }).json({
@@ -99,6 +102,7 @@ const logoutUser = (req, res) => {
 //auth middleware
 const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
+  // console.log(token);
   if (!token)
     return res.status(401).json({
       success: false,
@@ -106,7 +110,7 @@ const authMiddleware = async (req, res, next) => {
     });
 
   try {
-    const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (error) {
