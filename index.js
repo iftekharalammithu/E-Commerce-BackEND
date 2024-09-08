@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const { mongoDB_connection } = require("./Utils/MongoDB_Connect");
 const Auth_router = require("./Routes/Auth/Auth_Route");
+const adminProductsRouter = require("./Routes/Admin/Product_route");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", Auth_router);
+app.use("/api/admin/products", adminProductsRouter);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
