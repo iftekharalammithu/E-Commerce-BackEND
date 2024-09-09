@@ -6,6 +6,7 @@ const { mongoDB_connection } = require("./Utils/MongoDB_Connect");
 const Auth_router = require("./Routes/Auth/Auth_Route");
 const adminProductsRouter = require("./Routes/Admin/Product_route");
 const Product_router = require("./Routes/Shop/Product-Routes");
+const Cart_router = require("./Routes/Shop/Cart-Route");
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(express.json());
 app.use("/api/auth", Auth_router);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/products", Product_router);
+app.use("/api/shop/cart", Cart_router);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
