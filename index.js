@@ -8,6 +8,7 @@ const adminProductsRouter = require("./Routes/Admin/Product_route");
 const Product_router = require("./Routes/Shop/Product-Routes");
 const Cart_router = require("./Routes/Shop/Cart-Route");
 const Address_router = require("./Routes/Shop/Address-Route");
+const Order_router = require("./Routes/Shop/Order-Route");
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/products", Product_router);
 app.use("/api/shop/cart", Cart_router);
 app.use("/api/shop/address", Address_router);
+app.use("/api/shop/order", Order_router);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
