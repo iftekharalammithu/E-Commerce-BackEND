@@ -9,6 +9,7 @@ const Product_router = require("./Routes/Shop/Product-Routes");
 const Cart_router = require("./Routes/Shop/Cart-Route");
 const Address_router = require("./Routes/Shop/Address-Route");
 const Order_router = require("./Routes/Shop/Order-Route");
+const Admin_Order_router = require("./Routes/Admin/Order-Route");
 
 const app = express();
 
@@ -43,6 +44,8 @@ app.use(express.json());
 app.use("/api/auth", Auth_router);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/products", Product_router);
+app.use("/api/admin/orders", Admin_Order_router);
+
 app.use("/api/shop/cart", Cart_router);
 app.use("/api/shop/address", Address_router);
 app.use("/api/shop/order", Order_router);
