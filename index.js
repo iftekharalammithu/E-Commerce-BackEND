@@ -10,6 +10,8 @@ const Cart_router = require("./Routes/Shop/Cart-Route");
 const Address_router = require("./Routes/Shop/Address-Route");
 const Order_router = require("./Routes/Shop/Order-Route");
 const Admin_Order_router = require("./Routes/Admin/Order-Route");
+const Search_router = require("./Routes/Shop/Search_Router");
+const Review_router = require("./Routes/Shop/Review-Route");
 
 const app = express();
 
@@ -49,6 +51,8 @@ app.use("/api/admin/orders", Admin_Order_router);
 app.use("/api/shop/cart", Cart_router);
 app.use("/api/shop/address", Address_router);
 app.use("/api/shop/order", Order_router);
+app.use("/api/shop/search", Search_router);
+app.use("/api/shop/review", Review_router);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
