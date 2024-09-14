@@ -12,6 +12,7 @@ const Order_router = require("./Routes/Shop/Order-Route");
 const Admin_Order_router = require("./Routes/Admin/Order-Route");
 const Search_router = require("./Routes/Shop/Search_Router");
 const Review_router = require("./Routes/Shop/Review-Route");
+const FeatureRouter_router = require("./Routes/Shop/Feature");
 
 const app = express();
 
@@ -53,6 +54,8 @@ app.use("/api/shop/address", Address_router);
 app.use("/api/shop/order", Order_router);
 app.use("/api/shop/search", Search_router);
 app.use("/api/shop/review", Review_router);
+
+app.use("/api/common/feature", FeatureRouter_router);
 
 app.get("/", (req, res) => {
   res.send("Home Page");
