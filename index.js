@@ -46,9 +46,9 @@ app.use(express.json());
 
 app.use("/api/auth", Auth_router);
 app.use("/api/admin/products", adminProductsRouter);
-app.use("/api/admin/products", Product_router);
 app.use("/api/admin/orders", Admin_Order_router);
 
+app.use("/api/shop/products", Product_router);
 app.use("/api/shop/cart", Cart_router);
 app.use("/api/shop/address", Address_router);
 app.use("/api/shop/order", Order_router);

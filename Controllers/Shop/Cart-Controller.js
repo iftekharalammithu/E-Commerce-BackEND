@@ -4,6 +4,7 @@ const Product = require("../../Models/Product");
 const addToCart = async (req, res) => {
   try {
     const { userId, productId, quantity } = req.body;
+    // console.log(userId, productId, quantity);
 
     if (!userId || !productId || quantity <= 0) {
       return res.status(400).json({
@@ -26,10 +27,13 @@ const addToCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({ userId, items: [] });
     }
+    // console.log(cart.items.findIndex);
 
-    const findCurrentProductIndex = Cart.items.findIndex(
-      (item) => item.productId.toString() === productId
-    );
+    const findCurrentProductIndex = cart.items
+      ? cart.items.findIndex((item) => {
+          return item.productId.toString() === productId;
+        })
+      : -1;
 
     if (findCurrentProductIndex === -1) {
       cart.items.push({ productId, quantity });
@@ -52,8 +56,10 @@ const addToCart = async (req, res) => {
 };
 
 const fetchCartItems = async (req, res) => {
+  // console.log("fetchcart");
   try {
     const { userId } = req.params;
+    // console.log(userId);
 
     if (!userId) {
       return res.status(400).json({
